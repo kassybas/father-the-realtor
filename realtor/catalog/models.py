@@ -1,4 +1,5 @@
 from django.db import models
+import uuid # Required for unique property instances
 
 # Create your models here.
 # TODO hungarian spelling of help_texts
@@ -8,15 +9,15 @@ class Property(models.Model):
     A very basic definitions of a Property
     """
 
-    code = models.CharField(max_length=16, help_text="Az ingatlan azonositója")
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID")
     size = models.PositiveSmallIntegerField(help_text="Méret")
     rooms = models.PositiveSmallIntegerField(help_text="Szobak szama")
     half_rooms = models.PositiveSmallIntegerField(help_text="Felszobak szama")
     number_of_floors = models.PositiveSmallIntegerField(help_text='Szintek szama')
-    on_floor = models.TextField(help_text='Hanyadik emelet') #TODO: choices
+    on_floor = models.PositiveSmallIntegerField(help_text='Hanyadik emelet') #TODO: choices
 
-    added_at = models.DateTimeField(auto_add_now=True, help_text="Hozzaadas datuma") # Hidden
-    extras = models.TextField(help_text='Tartozek') #TODO: choices
+    added_at = models.DateTimeField(auto_now_add=True, help_text="Hozzaadas datuma") # Hidden
+    extras = models.TextField(max_length=120, help_text='Tartozek') #TODO: choices
     description = models.TextField(help_text='Leiras')
     price = models.BigIntegerField(help_text='Ar')
 
@@ -32,7 +33,7 @@ class Property(models.Model):
         return self.code + ' kod'
 
 class City(models.Model):
-    name = models.CharField(help_text="A varos neve")
+    name = models.CharField(max_length=40, help_text="A varos neve")
 
     class Meta:
         ordering = ["name"]
@@ -41,7 +42,8 @@ class City(models.Model):
         return self.name
 
 class Heating(models.Model):
-    kind = models.CharField(help_text="Futes tipusa")
+
+    kind = models.CharField(max_length=40, help_text="Futes tipusa")
 
     class Meta:
         ordering = ["kind"]
@@ -50,7 +52,7 @@ class Heating(models.Model):
         return self.kind
 
 class PropertyState(models.Model):
-    property_state = models.CharField(help_text="Ingatlan allapota (uj/ujszeru/felujitott)")
+    property_state = models.CharField(max_length=40, help_text="Ingatlan allapota (uj/ujszeru/felujitott)")
 
     class Meta:
         ordering = ["property_state"]
@@ -59,7 +61,7 @@ class PropertyState(models.Model):
         return self.property_state
 
 class PropertyType(models.Model):
-    property_type = models.CharField(help_text="Az ingatlan tipusa(csaladi haz, lakas, stb.)")
+    property_type = models.CharField(max_length=40, help_text="Az ingatlan tipusa(csaladi haz, lakas, stb.)")
 
     class Meta:
         ordering = ["property_type"]
