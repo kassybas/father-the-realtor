@@ -1,16 +1,18 @@
 from django.db import models
 import uuid # Required for unique property instances
+from django.urls import reverse
 
 # Create your models here.
-# TODO hungarian spelling of help_texts
+# TODO hungarian spelling of help_texts, verbose_name,
 
 class Property(models.Model):
     """
     A very basic definitions of a Property
     """
 
+    # TODO: add human codeG
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID")
-    size = models.PositiveSmallIntegerField(help_text="Méret")
+    size = models.PositiveSmallIntegerField(verbose_name="Meret", help_text="Méret")
     rooms = models.PositiveSmallIntegerField(help_text="Szobak szama")
     half_rooms = models.PositiveSmallIntegerField(help_text="Felszobak szama")
     number_of_floors = models.PositiveSmallIntegerField(help_text='Szintek szama')
@@ -28,9 +30,18 @@ class Property(models.Model):
 
     class Meta:
        ordering = ["-added_at"]
-    
+       verbose_name = "Ingatlan"
+       verbose_name_plural = "Ingatlanok"
+
     def __str__(self):
-        return self.code + ' kod'
+        #TODO change this
+        return str(self.id)
+
+    def get_absolute_url(self):
+        """
+        Returns the url to access a particular instance of the model.
+        """
+        return reverse('property-detail', args=[str(self.id)])
 
 class City(models.Model):
     name = models.CharField(max_length=40, help_text="A varos neve")
@@ -69,4 +80,4 @@ class PropertyType(models.Model):
     def __str__(self):
         return self.property_type
 
-# Continue: model management! https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models
+# Continue: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Admin_site
