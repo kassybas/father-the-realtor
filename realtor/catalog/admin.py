@@ -7,3 +7,4 @@ admin.site.register(Heating)
 admin.site.register(PropertyState)
 admin.site.register(PropertyType)
 # Register your models here.
+# Docs: https://docs.djangoproject.com/en/2.0/ref/contrib/admin/

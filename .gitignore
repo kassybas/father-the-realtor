@@ -1,5 +1,6 @@
 venv
 **/.vscode/*
+realtor/catalog/migrations/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
