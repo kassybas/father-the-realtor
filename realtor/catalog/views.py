@@ -19,3 +19,12 @@ class PropertyListView(generic.ListView):
     model = Property
     context_object_name = 'prop_list'   # your own name for the list as a template variable
     template_name = 'prop_list.html'  # Specify your own template name/location
+
+def prop_detail_view(request, pk):
+    prop_id = Property.objects.get(pk=pk)
+
+    return render(
+        request,
+        'prop_detail.html',
+        context = {'prop': prop_id}
+    )

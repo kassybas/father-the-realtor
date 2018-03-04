@@ -8,7 +8,7 @@
 
       {% for prop in prop_list %}
       <li>
-        <a href="{{ prop.get_absolute_url }}">{{ prop.id }}</a> ({{ prop.city }})
+        <a href="{{ prop.get_absolute_url }}">{{ prop.city }}</a> ({{prop.size}})
       </li>
       {% endfor %}
 

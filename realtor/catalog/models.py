@@ -11,7 +11,7 @@ class Property(models.Model):
     """
 
     # TODO: add human codeG
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID")
+    id = models.AutoField(primary_key=True)
     size = models.PositiveSmallIntegerField(verbose_name="Meret", help_text="Méret")
     rooms = models.PositiveSmallIntegerField(help_text="Szobak szama")
     half_rooms = models.PositiveSmallIntegerField(help_text="Felszobak szama")
@@ -41,7 +41,7 @@ class Property(models.Model):
         """
         Returns the url to access a particular instance of the model.
         """
-        return reverse('property-detail', args=[str(self.id)])
+        return reverse('prop-detail', args=[str(self.id)])
 
 class City(models.Model):
     name = models.CharField(max_length=40, help_text="A varos neve")

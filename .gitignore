@@ -6,7 +6,6 @@ realtor/catalog/migrations/
 __pycache__/
 *.py[cod]
 *$py.class
-realtor/db.sqlite3
 
 # C extensions
 *.so
