@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Book List</h1>
+
+    {% if prop_list %}
+    <ul>
+
+      {% for prop in prop_list %}
+      <li>
+        <a href="{{ prop.get_absolute_url }}">{{ prop.id }}</a> ({{ prop.city }})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no books in the library.</p>
+    {% endif %}
+{% endblock %}
